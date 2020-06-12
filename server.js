@@ -18,8 +18,7 @@ app.use('/',indexRoute)
 //Connexion à MongoDB
 mongoose.connect(process.env.DB_URL,  { useNewUrlParser: true },()=>console.log('en train de se connecter'))
 const db = mongoose.connection
-
-db.once('open',()=> console.log('Connected successfully'))
-db.on('error',(error)=> console.error(error))
+db.on('error',(error)=> console.error(console.error()))
+db.once('open',()=> console.log('Connectée avec succès'))
 
 app.listen(process.env.PORT || 3001)
