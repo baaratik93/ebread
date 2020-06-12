@@ -1,10 +1,5 @@
+let dotenv = require('dotenv-flow').config()
 
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').load()
-  }else{
-    require('dotenv').config()
-
-  }
 let express = require('express')
 let app = express()
 let expejslayout = require('express-ejs-layouts')
