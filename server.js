@@ -1,9 +1,15 @@
+
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').load()
+  }else{
+    require('dotenv').config()
+
+  }
 let express = require('express')
 let app = express()
 let expejslayout = require('express-ejs-layouts')
 let indexRoute = require('./routes/index')
 let mongoose = require('mongoose')
-require('dotenv').config()
 //initialisation
 app.set('view engine', 'ejs')
 app.set('views',__dirname + '/views')
