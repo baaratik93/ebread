@@ -5,6 +5,7 @@ let express = require('express')
 let app = express()
 let expejslayout = require('express-ejs-layouts')
 let indexRoute = require('./routes/index')
+let boulangerRoute = require('./routes/boulanger')
 let mongoose = require('mongoose')
 //initialisation
 app.set('view engine', 'ejs')
@@ -16,6 +17,9 @@ app.use(express.static('public'))
 
 //import de routes
 app.use('/',indexRoute)
+app.use('/boulangers',boulangerRoute)
+app.use('/boulangers/new',boulangerRoute)
+app.use('/boulangers/create',boulangerRoute)
 
 //Connexion à MongoDB
 mongoose.connect(process.env.DB_URL,  { useNewUrlParser: true },()=>console.log('en train de se connecter'))
