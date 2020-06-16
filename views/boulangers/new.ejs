@@ -1,1 +1,10 @@
-Formulaire d'ajout boulanger
+<h1>Ajouter un boulanger</h1>
+<form action="/boulangers" method="POST">
+    <pre>
+        <fieldset>
+            <legend>Nouveau</legend>
+            <%- include('./__form_control') %>
+            <input type="reset" value="Annuler">             <input type="submit" value="appliquer">
+        </fieldset>
+    </pre>
+</form>
