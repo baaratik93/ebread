@@ -3,8 +3,22 @@ let router = express.Router()
 let Boulanger = require('../models/boulanger')
 
 //  Lister tous les boulangers
-router.get('/',(req,res)=>{
-    res.render('boulangers/index')
+router.get('/', async(req,res)=>{
+    let serachOptions = {}
+    if(req.query.nom ==! null || req.query.nom !== ''){
+        serachOptions = RegExp(req.query.nom, 'i')
+    }
+    try {
+        //res.send('boulangers/index')
+        let boulangers = await Boulanger.find({})
+        res.render('boulangers/index',{
+            boulangers: boulangers,
+            serachOptions: req.query
+        })
+
+    }catch {
+        res.redirect('/')
+    }
 })
 //  demande du formulaire d'ajout d'un boulanger
 router.get('/new',(req,res)=>{
