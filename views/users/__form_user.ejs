@@ -1,0 +1,60 @@
+
+<form action="/" method="post">
+    <fieldset>
+        <pre>
+            <div>
+                <label for="">PRENOM</label>
+                <input
+                type="text" 
+                name="prenom" 
+                value="<%=user.prenom%>"
+                placeholder="Entrez votre prénom"
+                >  
+            </div>
+            
+            <div>
+                <label for="">NOM</label>
+                <input
+                type="text" 
+                name="nom" 
+                value="<%=user.nom%>"
+                placeholder="Entrez votre nom"
+                >  
+            </div>
+            
+            <div>
+                <label for="">E-MAIL</label>
+                <input
+                type="text" 
+                name="email" 
+                value="<%=user.email%>"
+                placeholder="Entrez votre mail"
+                >  
+            </div>
+            
+            <div>
+                <label for="">MOT DE PASSE</label>
+                <input
+                type="password" 
+                name="pwd" 
+                value="<%=user.pwd%>"
+                placeholder="Entrez votre mot de passe"
+                >  
+            </div>
+            
+            <div>
+                <label for="">CONFIRMER LE MOT DE PASSE</label>
+                <input
+                type="password" 
+                name="cpassword" 
+                value="<%=user.cpassword%>"
+                placeholder="confirmez votre mot de passe"
+                >  
+            </div>
+            <div>
+                <input type="reset" value="annuler">                    <input type="submit" value="s'inscrire">
+                
+            </div>
+        </pre>
+    </fieldset>
+    </form>

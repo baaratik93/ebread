@@ -1,0 +1,26 @@
+<form action="/">
+    <fieldset>
+        <legend>Connexion</legend>
+            <div>
+                <label for="">Login</label>
+                <input
+                type="email" 
+                name="email" 
+                value="<%=user.email%>"
+                placeholder="Entrez votre email"
+                >  
+            </div>
+            <div>
+                <label for="">Mot de passe</label>
+                <input
+                type="password" 
+                name="pwd" 
+                value="<%=user.pwd%>"
+                placeholder="Entrez votre mot de passe"
+                >  
+            </div>
+            <div>
+                <input type="submit" value="Ouvrir une session">
+            </div>
+    </fieldset>
+</form>
