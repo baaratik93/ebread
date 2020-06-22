@@ -31,7 +31,7 @@ route.post('/signup',(req,res)=>{
                                 nom: req.body.nom,
                                 prenom: req.body.prenom,
                                 email: req.body.email,
-                                pwd: req.body.pwd
+                                pwd: hash
                            })
                             user.save()
                                 .then((result)=> 
