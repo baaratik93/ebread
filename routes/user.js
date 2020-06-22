@@ -12,5 +12,35 @@ route.get('/signup',(req,res)=>{
 route.get('/login',(req,res)=>{
     res.render('users/login', {user: new User()})
 })
+route.post('/signup',(req,res)=>{
+ User.find({email: req.body.email})
+    .exec()
+    .then((user)=>{
+        if(user.length >= 1){
+          return res.status(409).json({err: "Le mail existe déja"})
+        }else{
+            if(req.body.pwd === req.body.cpwd)
+            {
+                let user =  new User({
+                    nom: req.body.nom,
+                    prenom: req.body.prenom,
+                    email: req.body.email,
+                    pwd: req.body.pwd
+               })
+                user.save()
+                    .then((result)=> 
+                        {return res.status(201).json({msg: "L'utilisateur est ajouté avec succès"})}
+                     )
+                    .catch((err)=> 
+                        {
+                            return res.status(404).json({err: err})
+                        })
+            }else{
+                res.status(404).json({err: "les mots de passe ne correspondent pas"})
+            }
+        }
+    })
+})
+
 
 module.exports = route
