@@ -4,7 +4,10 @@ let User = require('../models/user')
 let bcrypt = require('bcrypt')
 
 route.get('/',(req,res)=>{
-    res.send('Les utilisateurs de e-bread')
+    User.find({})
+    .exec()
+    .then(users => res.status(200).send(users))
+    .catch( err => res.status(404).json({error: err}))
 })
 route.get('/signup',(req,res)=>{
     res.render('users/signup',{user: new User()})
@@ -14,10 +17,10 @@ route.get('/login',(req,res)=>{
     res.render('users/login', {user: new User()})
 })
 route.post('/signup',(req,res)=>{
- User.find({email: req.body.email})
+    User.findOne({email: req.body.email})
     .exec()
     .then((user)=>{
-        if(user.length >= 1){
+        if(user){
           return res.status(409).json({err: "Le mail existe déja"})
         }else{
             if(req.body.pwd === req.body.cpwd)
@@ -35,7 +38,9 @@ route.post('/signup',(req,res)=>{
                            })
                             user.save()
                                 .then((result)=> 
-                                    {return res.status(201).json({msg: "L'utilisateur est ajouté avec succès"})}
+                                    {
+                                        return res.status(201).json({msg: "L'utilisateur est ajouté avec succès"})
+                                    }
                                  )
                                 .catch((err)=> 
                                     {
@@ -48,6 +53,29 @@ route.post('/signup',(req,res)=>{
             }
         }
     })
+})
+
+route.post('/login',(req,res)=>{
+User.findOne({email : req.body.email})
+.exec()
+.then((user)=>{
+    if(!user){
+        return res.status(404).json({err: "Cet utilisateur n'existe pas"})
+    }
+    bcrypt.compare(req.body.pwd, user.pwd, (err, result)=>{
+       
+        if(result){
+            return res.status(201).json({msg: "Bonjour "+user.prenom+" "+user.nom+" ,votre session est ouverte avec succes"})
+        }else{
+            return res.status(401).json({err: "Mot de passe incorrect"})
+
+        }
+    })
+})
+.catch((err)=>{
+    return res.status(409).json({error: err})
+})
+
 })
 
 
