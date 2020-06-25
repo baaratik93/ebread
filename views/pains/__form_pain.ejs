@@ -1,0 +1,36 @@
+<fieldset>
+    <pre>
+        <div>
+            <label for="">LIBELE</label>
+            <input
+            type="text" 
+            name="libele" 
+            value="<%= pain.libele%>"
+            placeholder="Entrez le libelé du type de pain"
+            >  
+        </div>
+        <div>
+            <label for="">CODE</label>
+            <input
+            type="text" 
+            name="code" 
+            value="<%= pain.code%>"
+            placeholder="Entrez le code du type de pain"
+            >  
+        </div>
+        <div>
+            <label for="">MASSE</label>
+            <input
+            type="number" 
+            name="masse" 
+            value="<%= pain.masse%>"
+            placeholder="Entrez la masse du type de pain"
+            >  
+        </div>
+        
+        <div>
+            <input type="reset" value="annuler">                    <input type="submit" value="ajouter">
+            
+        </div>
+    </pre>
+</fieldset>

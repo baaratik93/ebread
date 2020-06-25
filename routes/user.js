@@ -65,7 +65,7 @@ User.findOne({email : req.body.email})
     bcrypt.compare(req.body.pwd, user.pwd, (err, result)=>{
        
         if(result){
-            return res.status(201).json({msg: "Bonjour "+user.prenom+" "+user.nom+" ,votre session est ouverte avec succes"})
+            return res.status(201).json({msg: "Bonjour "+user.prenom+" "+user.nom+" ,votre session est ouverte avec succes",res: result})
         }else{
             return res.status(401).json({err: "Mot de passe incorrect"})
 
