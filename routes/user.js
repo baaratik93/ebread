@@ -2,8 +2,10 @@ const express = require('express')
 const route = express.Router()
 let User = require('../models/user')
 let bcrypt = require('bcrypt')
+let jwt = require('jsonwebtoken')
+let checkAuth = require('../middlewares/checkAuth')
 
-route.get('/',(req,res)=>{
+route.get('/', checkAuth, (req,res)=>{
     User.find({})
     .exec()
     .then(users => res.status(200).send(users))
@@ -65,7 +67,22 @@ User.findOne({email : req.body.email})
     bcrypt.compare(req.body.pwd, user.pwd, (err, result)=>{
        
         if(result){
-            return res.status(201).json({msg: "Bonjour "+user.prenom+" "+user.nom+" ,votre session est ouverte avec succes",res: result})
+            let token= jwt.sign(
+                {
+                    email: user.email,
+                userId: user._id
+            },
+            process.env.JWT_KEY,
+            {
+                expiresIn: "1h"
+            }
+            )
+           
+            return res.status(201).json({
+                msg: "Bonjour "+user.prenom+" "+user.nom+" ,votre session est ouverte avec succes",
+                res: result,
+                token: token
+            })
         }else{
             return res.status(401).json({err: "Mot de passe incorrect"})
 

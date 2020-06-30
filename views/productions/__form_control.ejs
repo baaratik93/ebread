@@ -1,0 +1,25 @@
+        <% let date = new Date().toISOString().slice(2,10).split('-').reverse().join('')%>
+        <label for="code">Code</label>
+        <input 
+        type="text"
+        readonly
+        value="PROD-<%= date%>"
+        name="codeProduction">
+
+        <label for="poids_farine">Poids de la farine</label>
+        <input 
+        type="number"
+        value="<%= production.poids_farine%>"
+        name="poids_farine"> en (Kg)
+
+        <label for="levure">Sachet de levure</label>
+        <input 
+        type="number"
+        value="<%= production.levure%>"
+        name="levure"> paquets
+
+        <label for="ameliorant">Sachet d'améliorant</label>
+        <input 
+        type="number"
+        value="<%= production.ameliorant%>"
+        name="ameliorant"> sachets
